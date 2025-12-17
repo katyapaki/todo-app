@@ -7,8 +7,10 @@
   --accent: #3b82f6;
   --accent-2: #2563eb;
   --accent-hover: #60a5fa;
-  --success: #10b981;
-  --success-2: #059669;
+  --accent-hover-bg: rgba(59, 130, 246, 0.1);
+  --accent-border: rgba(59, 130, 246, 0.3);
+  --accent-shadow: rgba(59, 130, 246, 0.3);
+  --accent-shadow-strong: rgba(59, 130, 246, 0.4);
   --danger: #ef4444;
   --danger-2: #dc2626;
   --ring: #3b82f680;
@@ -28,8 +30,10 @@
   --accent: #3b82f6;
   --accent-2: #2563eb;
   --accent-hover: #60a5fa;
-  --success: #10b981;
-  --success-2: #059669;
+  --accent-hover-bg: rgba(59, 130, 246, 0.1);
+  --accent-border: rgba(59, 130, 246, 0.3);
+  --accent-shadow: rgba(59, 130, 246, 0.3);
+  --accent-shadow-strong: rgba(59, 130, 246, 0.4);
   --danger: #ef4444;
   --danger-2: #dc2626;
   --ring: #3b82f640;
@@ -128,7 +132,7 @@ h1 {
   box-shadow: var(--shadow-sm);
 }
 #todo-input:hover {
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: var(--accent-border);
   box-shadow: var(--shadow-md);
 }
 #todo-input:focus { 
@@ -141,7 +145,7 @@ h1 {
   border: 2px solid rgba(0,0,0,0.08);
 }
 :root.light #todo-input:hover {
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: var(--accent-border);
 }
 
 #add-btn {
@@ -168,7 +172,7 @@ h1 {
 }
 #add-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 24px var(--accent-shadow-strong);
 }
 #add-btn:hover::before {
   opacity: 1;
@@ -183,7 +187,7 @@ h1 {
 }
 
 :root.light #add-btn:hover {
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 24px var(--accent-border);
 }
 
 #todo-list {
@@ -208,7 +212,7 @@ h1 {
   box-shadow: var(--shadow-sm);
 }
 .todo-item:hover {
-  border-color: rgba(59, 130, 246, 0.2);
+  border-color: var(--accent-border);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -257,7 +261,7 @@ h1 {
   border: 2px solid rgba(0,0,0,0.06);
 }
 :root.light .todo-item:hover {
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: var(--accent-border);
 }
 
 .todo-check {
@@ -354,13 +358,13 @@ h1 {
   position: relative;
 }
 .filters > button:hover:not([aria-selected="true"]) {
-  background: rgba(59, 130, 246, 0.1);
+  background: var(--accent-hover-bg);
   transform: translateY(-1px);
 }
 .filters > button[aria-selected="true"] {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px var(--accent-shadow);
 }
 .filters > button:active {
   transform: translateY(0);
