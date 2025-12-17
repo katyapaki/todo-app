@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" role="main">
+    <h1>Todos</h1>
+
+    <form id="todo-form" autocomplete="off" aria-label="Add a todo">
+      <input
+        id="todo-input"
+        type="text"
+        placeholder="What needs to be done?"
+        aria-label="Todo title"
+        required
+      />
+      <button id="add-btn" type="submit" aria-label="Add todo">Add</button>
+    </form>
+
+    <ul id="todo-list" aria-live="polite" aria-label="Todo list"></ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
