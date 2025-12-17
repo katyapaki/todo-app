@@ -1,12 +1,17 @@
 (function () {
   const STORAGE_KEY = 'todos-v1';
   const FILTER_KEY = 'todos-filter-v1';
+  const THEME_KEY = 'todos-theme-v1';
 
   const form = document.getElementById('todo-form');
   const input = document.getElementById('todo-input');
   const list = document.getElementById('todo-list');
   const filterButtons = Array.from(document.querySelectorAll('.filters [data-filter]'));
   const countEl = document.getElementById('count');
+  const themeToggle = document.getElementById('theme-toggle');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const allowMotion = () => !prefersReducedMotion.matches;
+  let recentlyAddedId = null;
 
   const filters = /** @type {const} */ ({ all: 'all', active: 'active', completed: 'completed' });
   let currentFilter = loadFilter();
@@ -38,6 +43,21 @@
   }
   function saveFilter(f) {
     try { localStorage.setItem(FILTER_KEY, f); } catch {}
+  }
+
+  function loadTheme() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return theme === 'light' ? 'light' : 'dark';
+  }
+  function saveTheme(theme) {
+    try { localStorage.setItem(THEME_KEY, theme); } catch {}
+  }
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+    }
   }
 
   function applyFilter(todos, f) {
@@ -78,6 +98,12 @@
       li.className = 'todo-item';
       li.dataset.id = todo.id;
 
+      if (allowMotion() && todo.id === recentlyAddedId) {
+        li.classList.add('entering');
+        li.addEventListener('animationend', () => li.classList.remove('entering'), { once: true });
+        recentlyAddedId = null;
+      }
+
       const chk = document.createElement('input');
       chk.type = 'checkbox';
       chk.className = 'todo-check';
@@ -102,9 +128,25 @@
       });
 
       del.addEventListener('click', () => {
+        const liEl = del.closest('li');
         const next = loadTodos().filter(t => t.id !== todo.id);
         saveTodos(next);
-        render(next);
+
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          render(next);
+        };
+
+        if (liEl && allowMotion()) {
+          liEl.classList.add('removing');
+          liEl.addEventListener('animationend', finish, { once: true });
+          setTimeout(finish, 220); // quick fallback if animation is skipped
+        } else {
+          finish();
+        }
+
         input.focus();
       });
 
@@ -125,6 +167,7 @@
       text: trimmed,
       done: false,
     };
+    recentlyAddedId = allowMotion() ? todo.id : null;
     const next = [todo, ...todos];
     saveTodos(next);
     render(next);
@@ -147,6 +190,14 @@
     });
   }
 
-  // Initial render
+  themeToggle.addEventListener('click', () => {
+    const current = loadTheme();
+    const next = current === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    saveTheme(next);
+  });
+
+  // Initial theme and render
+  applyTheme(loadTheme());
   render(loadTodos());
 })();
