@@ -22,6 +22,14 @@
     </form>
 
     <ul id="todo-list" aria-live="polite" aria-label="Todo list"></ul>
+    <div class="controls">
+      <div class="filters" role="tablist" aria-label="Filter todos">
+        <button type="button" data-filter="all" aria-selected="true">All</button>
+        <button type="button" data-filter="active" aria-selected="false">Active</button>
+        <button type="button" data-filter="completed" aria-selected="false">Completed</button>
+      </div>
+      <div id="count" class="count" aria-live="polite" aria-atomic="true"></div>
+    </div>
   </main>
 
   <script src="script.js"></script>

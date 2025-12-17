@@ -78,7 +78,7 @@ h1 {
 
 .todo-item {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 8px;
   align-items: center;
   padding: 10px 12px;
@@ -87,6 +87,13 @@ h1 {
   background: var(--panel);
 }
 .todo-text { overflow-wrap: anywhere; }
+.todo-text.done { text-decoration: line-through; color: var(--muted); }
+
+.todo-check {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
 
 .todo-delete {
   border: 1px solid rgba(255,255,255,0.08);
@@ -103,3 +110,30 @@ h1 {
   text-align: center;
   padding: 8px 0 2px;
 }
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.filters {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.filters > button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.filters > button[aria-selected="true"] {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+
+.count { color: var(--muted); }

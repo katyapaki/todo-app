@@ -5,6 +5,7 @@ A tiny, dependency-free todo app:
 - See the list update instantly
 - Delete any item with its button
 - Persists between refreshes via `localStorage`
+- Filter by All / Active / Completed
 
 ## Run locally
 
@@ -24,4 +25,9 @@ Install "Live Server" extension, then right-click `index.html` → "Open with Li
 ## Files
 - `index.html` — structure and UI
 - `styles.css` — minimal styling
-- `script.js` — add/delete logic + localStorage persistence
+- `script.js` — add/delete/complete, filters, and localStorage persistence
+
+## Filters
+- Use the buttons under the list: All / Active / Completed.
+- The current filter is remembered across reloads.
+- Mark an item complete with the checkbox; it will move according to the selected filter.
